@@ -61,9 +61,7 @@
 						{
 							echo "<p class='div-home-pp' align='center'><a class='div-home-pp2' href='#".$consulta['id']."'>".$consulta['titulo']."</a></p>";
 							echo "<hr class='hr'>";
-						}
-									
-						mysql_close($conexao);}
+						}}
 					?>
 					<iframe width="250" height="200" scrolling="no" allowfullscreen frameborder="0" src="http://videos.clicrbs.com.br/rs/radio-atlantida/audionews/497"> </iframe>
 				</div>
@@ -81,10 +79,35 @@
 						{
 							echo "<p class='div-home-p' id=".$consulta['id']." align='center'>".$consulta['titulo']."</p>";
 							echo $consulta['elm1'];
+							$idc = $consulta['id'];
+							
+							echo "<h3 style='color:#fff;'>Comentarios</h3>";
+
+								$conexao = mysql_select_db("comentarios");
+								$query2 = "SELECT nome, comentario FROM comentarios where id = ".$idc;
+								$result2 = mysql_query($query2);
+								echo "<br>";
+								while ($consulta2 = mysql_fetch_assoc($result2)){
+								  echo "<h4 style='color:#fff;'>".$consulta2['nome']."</h4>";
+									echo "<p style='color:#fff;'>".$consulta2['comentario']."</p>";
+									echo "<hr class='hr'>";
+								}
+						?>
+
+							<h3 style="color:#fff;">Deixe seu comentário</h3>
+							<form action="conexao2.php" method="post">
+								<fieldset>
+									<input name="id" type="hidden" value="<?php echo $idc; ?>"/>
+									<input type="text" name="nome" class="form-control" placeholder="Nome" /></p>
+									<input type="text" name="email" class="form-control" placeholder="E-mail" /></p>
+									<input type="text" name="site" class="form-control" placeholder="Site (opcional)" /></p>
+									<textarea name="comentario" class="form-control" rows="10" cols="60"  placeholder="Deixe seu comentário"></textarea></p>
+									<input type="submit" class="btn btn-info" name="cadastrar"	 value="Comente!" />
+								</fieldset>
+							</form>
+						<?php
 							echo "<hr class='hr'>";
-						}
-									
-						mysql_close($conexao);}
+						}}
 					?>
 				</div>
 			</div>
